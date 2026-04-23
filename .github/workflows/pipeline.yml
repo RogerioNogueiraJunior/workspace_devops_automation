@@ -1,0 +1,62 @@
+name: 🚀 Java API CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  IMAGE_NAME: "java-api:${{ github.sha }}"
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🔍 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: ☕ Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: 📦 Build com Maven
+        run: mvn clean package
+
+      - name: 🧪 Executar Testes
+        run: mvn test
+
+      - name: 🛠️ Build da Imagem Docker
+        run: docker build -t ${{ env.IMAGE_NAME }} .
+
+      - name: 🔐 Simulação de Scan de Segurança
+        run: echo "✅ Scan de segurança simulado — nenhuma vulnerabilidade crítica encontrada"
+
+      - name: 🚀 Simulação de Deploy
+        run: echo "✅ Deploy simulado para ambiente de staging"
+
+      - name: 📦 Upload do Artefato
+        uses: actions/upload-artifact@v4
+        with:
+          name: devops-api-jar
+          path: target/devops-api-1.0.jar
+
+  deploy-staging:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Download do Artefato
+        uses: actions/download-artifact@v4
+        with:
+          name: devops-api-jar
+
+      - name: 🚀 Simulação de Deploy para Staging
+        run: |
+          echo "✅ Artefato recebido com sucesso"
+          echo "📡 Deploy simulado para: https://staging.exemplo.com"
+          ls -lh *.jar
