@@ -41,7 +41,7 @@ Validar o funcionamento do GitHub Actions por meio de um workflow simples, confi
 ## 🏗️ Estrutura do Projeto
 
 ```text
-workspace-devops-automation/
+workspace_devops_automation/
 ├── .github/
 │   └── workflows/
 │       └── hello.yml
@@ -55,21 +55,21 @@ workspace-devops-automation/
 ### 1. Criar a estrutura local
 
 ```bash
-mkdir workspace-devops-automation
-cd workspace-devops-automation
+mkdir workspace_devops_automation
+cd workspace_devops_automation
 ```
 
 ### 2. Criar o repositório no GitHub
 
 - Acesse https://github.com
 - Clique em New Repository
-- Nome: `workspace-devops-automation`
+- Nome: `workspace_devops_automation`
 
 ### 3. Inicializar Git e conectar ao remoto
 
 ```bash
 git init
-git remote add origin https://github.com/Felipe-SMZ/workspace-devops-automation.git
+git remote add origin https://github.com/RogerioNogueiraJunior/workspace_devops_automation.git
 git add .
 git commit -m "first commit"
 git branch -M main
